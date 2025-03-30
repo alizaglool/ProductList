@@ -1,13 +1,5 @@
 # 🛍️ Product List App Task
 
-Grid View               |  List View
-:-------------------------:|:-------------------------:
-![Grid View](https://your-image-url.com/grid.png)  |  ![List View](https://your-image-url.com/list.png)
-Product Detail Screen    |  Skeleton Loading
-![Detail View](https://your-image-url.com/detail.png)  |  ![Skeleton](https://your-image-url.com/skeleton.png)
-
----
-
 ## 📱 Application Description
 
 * The app displays a list of products using an API and updates the UI with live data.
