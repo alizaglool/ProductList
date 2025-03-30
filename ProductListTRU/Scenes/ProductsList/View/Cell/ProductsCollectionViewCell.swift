@@ -20,6 +20,21 @@ final class ProductsCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         subView.layer.cornerRadius = 10
+        isSkeletonable = true
+        contentView.isSkeletonable = true
+        
+        productImageView.isSkeletonable = true
+        productTitleLabel.isSkeletonable = true
+        productCategoryLabel.isSkeletonable = true
+        productPriceLabel.isSkeletonable = true
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        productImageView.image = nil
+        productTitleLabel.text = nil
+        productCategoryLabel.text = nil
+        productPriceLabel.text = nil
     }
     
     func configure(with model: ProductCellViewModel) {

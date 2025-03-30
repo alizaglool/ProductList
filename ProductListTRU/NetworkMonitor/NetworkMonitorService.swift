@@ -31,11 +31,3 @@ enum NetworkError: Error {
     case noConnection
 }
 
-extension NetworkError: LocalizedError {
-    var errorDescription: String? {
-        switch self {
-        case .noConnection:
-            return "No internet connection. Please try again later."
-        }
-    }
-}

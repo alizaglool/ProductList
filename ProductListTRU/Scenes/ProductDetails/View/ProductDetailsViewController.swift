@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import UICurrency
 
 class ProductDetailsViewController: UIViewController {
     

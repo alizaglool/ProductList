@@ -7,8 +7,8 @@
 
 import UIKit
 import RxSwift
-import UICurrency
 import Networking
+import SkeletonView
 
 final class ProductsViewController: UIViewController {
     
@@ -47,15 +47,11 @@ final class ProductsViewController: UIViewController {
 // MARK: - Setup Truck main Collection View -
 
 extension ProductsViewController {
-
     private func setupProductCollectionView() {
-        productCollectionView.rx
-            .setDelegate(self)
-            .disposed(by: disposeBag)
+        productCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         productCollectionView.dataSource = nil
-        
-        productCollectionView.register(ProductsCollectionViewCell.nib(),
-                                         forCellWithReuseIdentifier: ProductsCollectionViewCell.identifier)
+        productCollectionView.register(ProductsCollectionViewCell.nib(), forCellWithReuseIdentifier: ProductsCollectionViewCell.identifier)
+        productCollectionView.isSkeletonable = true
     }
 }
 
@@ -64,10 +60,17 @@ extension ProductsViewController {
 extension ProductsViewController {
     private func bindLoadingToViewModel() {
         viewModel.activityIndicatorStatus
-            .subscribe(onNext: { [weak self] (isLoading) in
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLoading in
                 guard let self = self else { return }
-                Indicator.createIndicator(on: self, start: isLoading)
-            }).disposed(by: disposeBag)
+
+                if isLoading && self.viewModel.productsIsEmpty {
+                    self.productCollectionView.showAnimatedGradientSkeleton()
+                } else {
+                    self.productCollectionView.hideSkeleton(reloadDataAfter: true)
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -149,5 +152,24 @@ extension ProductsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+}
+
+extension ProductsViewController: SkeletonCollectionViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> SkeletonView.ReusableCellIdentifier {
+        return ProductsCollectionViewCell.identifier
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductsCollectionViewCell.identifier, for: indexPath) as! ProductsCollectionViewCell
+        return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return ProductsCollectionViewCell.identifier
     }
 }

@@ -1,10 +1,3 @@
-//
-//  ProductsViewModel.swift
-//  ProductListTRU
-//
-//  Created by Ali M. Zaghloul on 29/03/2025.
-//
-
 import Foundation
 import Networking
 import RxSwift
@@ -12,33 +5,43 @@ import RxCocoa
 
 protocol ProductsViewModelType: AnyObject {
     var products: Observable<[Product]> { get }
-    var activityIndicatorStatus: BehaviorRelay<Bool> { get set }
-    var errorService: PublishSubject<Error> { get set }
-    
+    var activityIndicatorStatus: BehaviorRelay<Bool> { get }
+    var errorService: PublishSubject<Error> { get }
+    var productsIsEmpty: Bool { get }
+
     func fetchProducts()
     func fetchNextPage()
 }
 
 final class ProductsViewModel: ProductsViewModelType {
-    
+
+    // MARK: - Pagination
     private let pageSize = 7
     private var offset = 0
     private var isLoadingMore = false
     private var allLoaded = false
-    
+
+    // MARK: - Dependencies
     private let api: ProductAPIProtocol
     private let cacheService: ProductCacheServiceProtocol
     private let networkMonitor: NetworkMonitorServiceProtocol
-    
+
+    // MARK: - Data
     private var productIDs: Set<Int> = []
     private var productsList: [Product] = []
-    
-    private var productsRelay = PublishSubject<[Product]>()
+
+    // MARK: - Observables
+    private let productsRelay = BehaviorRelay<[Product]>(value: [])
     var products: Observable<[Product]> { productsRelay.asObservable() }
-    
-    var activityIndicatorStatus = BehaviorRelay<Bool>(value: false)
-    var errorService = PublishSubject<Error>()
-    
+
+    let activityIndicatorStatus = BehaviorRelay<Bool>(value: false)
+    let errorService = PublishSubject<Error>()
+
+    var productsIsEmpty: Bool {
+        return productsRelay.value.isEmpty
+    }
+
+    // MARK: - Init
     init(api: ProductAPIProtocol = ProductAPI(),
          cacheService: ProductCacheServiceProtocol = ProductCacheService(),
          networkMonitor: NetworkMonitorServiceProtocol = NetworkMonitorService()) {
@@ -46,85 +49,94 @@ final class ProductsViewModel: ProductsViewModelType {
         self.cacheService = cacheService
         self.networkMonitor = networkMonitor
     }
-}
 
-extension ProductsViewModel {
+    // MARK: - Public Methods
     func fetchProducts() {
+        activityIndicatorStatus.accept(true)
+
+        // Step 1: Show cached data immediately if available
+        sendCachedDataIfAvailable()
+
+        // Step 2: If offline, stop here
         guard networkMonitor.isConnected else {
+            activityIndicatorStatus.accept(false)
             errorService.onNext(NetworkError.noConnection)
-            sendCachedDataIfAvailable()
             return
         }
-        
-        offset = 0
-        allLoaded = false
-        productsList = []
-        productIDs = []
-        activityIndicatorStatus.accept(true)
-        
+
+        // Step 3: Proceed with fresh API fetch
+        resetState()
+
         api.getProducts(limit: pageSize, offset: offset) { [weak self] result in
             guard let self = self else { return }
             self.activityIndicatorStatus.accept(false)
-            
-            switch result {
-            case .success(let response):
-                guard let response = response, !response.isEmpty else {
-                    self.sendCachedDataIfAvailable()
-                    return
-                }
-                
-                let uniqueProducts = response.filter { !self.productIDs.contains($0.id) }
-                self.productIDs.formUnion(uniqueProducts.map { $0.id })
-                
-                self.productsList = uniqueProducts
-                self.productsRelay.onNext(self.productsList)
-                self.cacheService.save(products: uniqueProducts)
-                self.offset += self.pageSize
-                
-            case .failure(let error):
-                self.sendCachedDataIfAvailable()
-                self.errorService.onNext(error)
-            }
+            self.handleResult(result, isInitialLoad: true)
         }
     }
-    
-    private func sendCachedDataIfAvailable() {
-        if let cached = cacheService.load() {
-            self.productsRelay.onNext(cached)
-        }
-    }
-    
+
     func fetchNextPage() {
         guard networkMonitor.isConnected else {
             errorService.onNext(NetworkError.noConnection)
             return
         }
-        
+
         guard !isLoadingMore, !allLoaded else { return }
         isLoadingMore = true
-        
+
         api.getProducts(limit: pageSize, offset: offset) { [weak self] result in
             guard let self = self else { return }
             self.isLoadingMore = false
-            
-            switch result {
-            case .success(let response):
-                guard let response = response, !response.isEmpty else {
-                    self.allLoaded = true
-                    return
+            self.handleResult(result, isInitialLoad: false)
+        }
+    }
+
+    // MARK: - Private Helpers
+    private func resetState() {
+        offset = 0
+        allLoaded = false
+        productsList = []
+        productIDs = []
+    }
+
+    private func sendCachedDataIfAvailable() {
+        guard let cached = cacheService.load(), !cached.isEmpty else { return }
+
+        if productsList.isEmpty {
+            productIDs = Set(cached.map { $0.id })
+            productsList = cached
+            productsRelay.accept(cached)
+        }
+    }
+
+    private func handleResult(_ result: Result<[Product]?, Error>, isInitialLoad: Bool) {
+        switch result {
+        case .success(let response):
+            guard let response = response, !response.isEmpty else {
+                if isInitialLoad {
+                    sendCachedDataIfAvailable()
                 }
-                
-                let newProducts = response.filter { !self.productIDs.contains($0.id) }
-                self.productIDs.formUnion(newProducts.map { $0.id })
-                
-                self.productsList.append(contentsOf: newProducts)
-                self.productsRelay.onNext(self.productsList)
-                self.cacheService.save(products: self.productsList)
-                self.offset += self.pageSize
-                
-            case .failure(let error):
-                self.errorService.onNext(error)
+                allLoaded = true
+                return
             }
+
+            let newProducts = response.filter { !productIDs.contains($0.id) }
+            productIDs.formUnion(newProducts.map { $0.id })
+
+            if isInitialLoad {
+                productsList = newProducts
+            } else {
+                productsList.append(contentsOf: newProducts)
+            }
+
+            productsRelay.accept(productsList)
+            cacheService.save(products: productsList)
+            offset += pageSize
+
+        case .failure(let error):
+            if isInitialLoad {
+                sendCachedDataIfAvailable()
+            }
+            errorService.onNext(error)
         }
     }
 }
