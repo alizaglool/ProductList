@@ -52,8 +52,8 @@ extension SceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = windowScene
         
-        let viewModel = CurrencyConversionViewModel()
-        let currencyConversion = CurrencyConversionViewController(viewModel: viewModel)
+        let viewModel = ProductsViewModel()
+        let currencyConversion = ProductsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: currencyConversion)
         
         window?.rootViewController = navigationController

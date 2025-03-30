@@ -18,8 +18,14 @@
 		4789F7552A3A77A400FFDDB9 /* UICurrency in Frameworks */ = {isa = PBXBuildFile; productRef = 4789F7542A3A77A400FFDDB9 /* UICurrency */; };
 		F812575D2D97FFDF00BBF8BF /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = F812575C2D97FFDF00BBF8BF /* SkeletonView */; };
 		F81257612D98081A00BBF8BF /* ProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81257602D98081A00BBF8BF /* ProductsViewModel.swift */; };
-		F81257642D98084200BBF8BF /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81257622D98084200BBF8BF /* ProductsViewController.swift */; };
-		F81257652D98084200BBF8BF /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F81257632D98084200BBF8BF /* ProductsViewController.xib */; };
+		F837D3BD2D981C4600347D01 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = F837D3BC2D981C4600347D01 /* Kingfisher */; };
+		F837D3CC2D981C7200347D01 /* UIImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3C52D981C7200347D01 /* UIImageView+Kingfisher.swift */; };
+		F837D3D02D98264100347D01 /* ShadowBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3CF2D98264100347D01 /* ShadowBackgroundView.swift */; };
+		F837D3D22D98264D00347D01 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3D12D98264D00347D01 /* UIView+extension.swift */; };
+		F8AA3F692D980A88003ABFDD /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AA3F682D980A88003ABFDD /* ProductsViewController.xib */; };
+		F8AA3F6A2D980A88003ABFDD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA3F672D980A88003ABFDD /* ProductsViewController.swift */; };
+		F8AA3F6E2D980ADF003ABFDD /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AA3F6D2D980ADF003ABFDD /* ProductCollectionViewCell.xib */; };
+		F8AA3F6F2D980ADF003ABFDD /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA3F6C2D980ADF003ABFDD /* ProductCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +39,18 @@
 		4772444F2A379F2F005E14A8 /* UICurrency */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = UICurrency; sourceTree = "<group>"; };
 		F812575A2D97FFB700BBF8BF /* SkeletonView */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SkeletonView; path = ../../Desktop/SkeletonView; sourceTree = "<group>"; };
 		F81257602D98081A00BBF8BF /* ProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewModel.swift; sourceTree = "<group>"; };
-		F81257622D98084200BBF8BF /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
-		F81257632D98084200BBF8BF /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
+		F837D3BE2D981C6300347D01 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		F837D3BF2D981C6300347D01 /* UIImageView+CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+CheckBox.swift"; sourceTree = "<group>"; };
+		F837D3C02D981C6300347D01 /* UIImageView+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Data.swift"; sourceTree = "<group>"; };
+		F837D3C12D981C6300347D01 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		F837D3C22D981C6300347D01 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		F837D3C52D981C7200347D01 /* UIImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		F837D3CF2D98264100347D01 /* ShadowBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowBackgroundView.swift; sourceTree = "<group>"; };
+		F837D3D12D98264D00347D01 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
+		F8AA3F672D980A88003ABFDD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		F8AA3F682D980A88003ABFDD /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
+		F8AA3F6C2D980ADF003ABFDD /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
+		F8AA3F6D2D980ADF003ABFDD /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +60,7 @@
 			files = (
 				477244572A37A709005E14A8 /* RxSwift in Frameworks */,
 				477244552A37A709005E14A8 /* RxCocoa in Frameworks */,
+				F837D3BD2D981C4600347D01 /* Kingfisher in Frameworks */,
 				4789F7532A3A779F00FFDDB9 /* Networking in Frameworks */,
 				4789F7552A3A77A400FFDDB9 /* UICurrency in Frameworks */,
 				F812575D2D97FFDF00BBF8BF /* SkeletonView in Frameworks */,
@@ -77,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				477244582A37A82D005E14A8 /* Delegate */,
+				F837D3C92D981C7200347D01 /* Extension */,
 				477244592A37A847005E14A8 /* Utilities */,
 				4772445A2A37A871005E14A8 /* Scenes */,
 			);
@@ -105,8 +123,8 @@
 		4772445A2A37A871005E14A8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				F812575E2D9807F800BBF8BF /* View */,
-				F812575F2D98080000BBF8BF /* ViewModel */,
+				F837D3D52D994AA700347D01 /* ProductsList */,
+				F837D3D62D994ACE00347D01 /* ProductDetails */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -114,6 +132,7 @@
 		4789F7512A3A779F00FFDDB9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F837D3C32D981C6300347D01 /* Extension */,
 				F812575A2D97FFB700BBF8BF /* SkeletonView */,
 			);
 			name = Frameworks;
@@ -122,8 +141,9 @@
 		F812575E2D9807F800BBF8BF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F81257622D98084200BBF8BF /* ProductsViewController.swift */,
-				F81257632D98084200BBF8BF /* ProductsViewController.xib */,
+				F8AA3F672D980A88003ABFDD /* ProductsViewController.swift */,
+				F8AA3F682D980A88003ABFDD /* ProductsViewController.xib */,
+				F8AA3F6B2D980ABF003ABFDD /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -134,6 +154,70 @@
 				F81257602D98081A00BBF8BF /* ProductsViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F837D3C32D981C6300347D01 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F837D3BE2D981C6300347D01 /* String+extension.swift */,
+				F837D3BF2D981C6300347D01 /* UIImageView+CheckBox.swift */,
+				F837D3C02D981C6300347D01 /* UIImageView+Data.swift */,
+				F837D3C12D981C6300347D01 /* UIImageView+Kingfisher.swift */,
+				F837D3C22D981C6300347D01 /* UIViewController+Navigation.swift */,
+			);
+			name = Extension;
+			path = "../GitHub/ton-ios/TON/Extension";
+			sourceTree = "<group>";
+		};
+		F837D3C92D981C7200347D01 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F837D3D12D98264D00347D01 /* UIView+extension.swift */,
+				F837D3CF2D98264100347D01 /* ShadowBackgroundView.swift */,
+				F837D3C52D981C7200347D01 /* UIImageView+Kingfisher.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F837D3D52D994AA700347D01 /* ProductsList */ = {
+			isa = PBXGroup;
+			children = (
+				F812575E2D9807F800BBF8BF /* View */,
+				F812575F2D98080000BBF8BF /* ViewModel */,
+			);
+			path = ProductsList;
+			sourceTree = "<group>";
+		};
+		F837D3D62D994ACE00347D01 /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				F837D3D82D994AE500347D01 /* View */,
+				F837D3D72D994ADD00347D01 /* ViewModel */,
+			);
+			path = ProductDetails;
+			sourceTree = "<group>";
+		};
+		F837D3D72D994ADD00347D01 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F837D3D82D994AE500347D01 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8AA3F6B2D980ABF003ABFDD /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F8AA3F6C2D980ADF003ABFDD /* ProductCollectionViewCell.swift */,
+				F8AA3F6D2D980ADF003ABFDD /* ProductCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +243,7 @@
 				4789F7522A3A779F00FFDDB9 /* Networking */,
 				4789F7542A3A77A400FFDDB9 /* UICurrency */,
 				F812575C2D97FFDF00BBF8BF /* SkeletonView */,
+				F837D3BC2D981C4600347D01 /* Kingfisher */,
 			);
 			productName = ProductListTRU;
 			productReference = 477244372A379E9D005E14A8 /* ProductListTRU.app */;
@@ -192,6 +277,7 @@
 				477244502A379F6A005E14A8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				477244532A37A709005E14A8 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				F812575B2D97FFDF00BBF8BF /* XCLocalSwiftPackageReference "../../Desktop/SkeletonView" */,
+				F837D3BB2D981C4600347D01 /* XCLocalSwiftPackageReference "../Kingfisher" */,
 			);
 			productRefGroup = 477244382A379E9D005E14A8 /* Products */;
 			projectDirPath = "";
@@ -209,7 +295,8 @@
 			files = (
 				477244472A379E9F005E14A8 /* LaunchScreen.storyboard in Resources */,
 				477244442A379E9F005E14A8 /* Assets.xcassets in Resources */,
-				F81257652D98084200BBF8BF /* ProductsViewController.xib in Resources */,
+				F8AA3F6E2D980ADF003ABFDD /* ProductCollectionViewCell.xib in Resources */,
+				F8AA3F692D980A88003ABFDD /* ProductsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,9 +308,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F81257612D98081A00BBF8BF /* ProductsViewModel.swift in Sources */,
+				F837D3CC2D981C7200347D01 /* UIImageView+Kingfisher.swift in Sources */,
+				F837D3D22D98264D00347D01 /* UIView+extension.swift in Sources */,
 				4772443B2A379E9D005E14A8 /* AppDelegate.swift in Sources */,
-				F81257642D98084200BBF8BF /* ProductsViewController.swift in Sources */,
+				F8AA3F6F2D980ADF003ABFDD /* ProductCollectionViewCell.swift in Sources */,
+				F8AA3F6A2D980A88003ABFDD /* ProductsViewController.swift in Sources */,
 				4772443D2A379E9D005E14A8 /* SceneDelegate.swift in Sources */,
+				F837D3D02D98264100347D01 /* ShadowBackgroundView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +530,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../Desktop/SkeletonView;
 		};
+		F837D3BB2D981C4600347D01 /* XCLocalSwiftPackageReference "../Kingfisher" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Kingfisher;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -487,6 +582,10 @@
 		F812575C2D97FFDF00BBF8BF /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SkeletonView;
+		};
+		F837D3BC2D981C4600347D01 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

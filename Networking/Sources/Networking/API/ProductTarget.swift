@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Zaghloul on 15/06/2023.
 //
@@ -8,33 +8,26 @@
 import Foundation
 import Alamofire
 
-public enum CurrencyTarget {
-    case getCurencyType
-    case conversionAmount(from: String, to: String, amount: String)
+public enum ProductTarget {
+    case getProducts
 }
 
-extension CurrencyTarget: TargetType {
-    
-    
+extension ProductTarget: TargetType {
     public var baseURL: String {
         return EndPoints.baseURL.value
     }
     
     public var path: String {
         switch self {
-        case .getCurencyType:
-            return "symbols?access_key=\(EndPoints.apiKey.value)"
-        case .conversionAmount(from: let base , to: let target, amount: let amount):
-            return "convert?access_key=\(EndPoints.apiKey.value)&from=\(base)&to=\(target)&amount=\(amount)"
+        case .getProducts:
+            return "products"
         }
     }
     
     public var method: HTTPMethod {
         switch self {
-        case .getCurencyType:
+        case .getProducts:
             return .get
-        case .conversionAmount:
-            return .post
         }
     }
     

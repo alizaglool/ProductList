@@ -11,7 +11,7 @@ extension SystemDesign {
     public enum AppColors: String {
         case primary
         case secondary
-        case separator
+        case NeutralsCards
         case primaryOP
         case tabBar, gray
         case secondaryOP, green
