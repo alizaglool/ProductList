@@ -16,38 +16,101 @@ protocol ProductsViewModelType: AnyObject {
     var errorService: PublishSubject<Error> { get set }
     
     func fetchProducts()
+    func fetchNextPage()
 }
 
 final class ProductsViewModel: ProductsViewModelType {
     
-    var api: ProductAPIProtocol = ProductAPI()
+    private let pageSize = 7
+    private var offset = 0
+    private var isLoadingMore = false
+    private var allLoaded = false
+    
+    private let api: ProductAPIProtocol
+    private let cacheService: ProductCacheServiceProtocol
+    
+    private var productIDs: Set<Int> = []
+    private var productsList: [Product] = []
     
     private var productsRelay = PublishSubject<[Product]>()
-    var products: Observable<[Product]> {
-        productsRelay.asObservable()
+    var products: Observable<[Product]> { productsRelay.asObservable() }
+    
+    var activityIndicatorStatus = BehaviorRelay<Bool>(value: false)
+    var errorService = PublishSubject<Error>()
+    
+    init(api: ProductAPIProtocol = ProductAPI(),
+         cacheService: ProductCacheServiceProtocol = ProductCacheService()) {
+        self.api = api
+        self.cacheService = cacheService
     }
-    
-    var activityIndicatorStatus: BehaviorRelay = BehaviorRelay<Bool>(value: false)
-    var errorService: PublishSubject = PublishSubject<Error>()
-    
 }
 
 extension ProductsViewModel {
     func fetchProducts() {
+        offset = 0
+        allLoaded = false
+        productsList = []
+        productIDs = []
         activityIndicatorStatus.accept(true)
         
-        api.getProducts(completion: { [weak self] result in
+        api.getProducts(limit: pageSize, offset: offset) { [weak self] result in
             guard let self = self else { return }
             self.activityIndicatorStatus.accept(false)
             
             switch result {
             case .success(let response):
-                guard let response = response, !response.isEmpty else { return }
+                guard let response = response, !response.isEmpty else {
+                    self.sendCachedDataIfAvailable()
+                    return
+                }
                 
-                self.productsRelay.onNext(response)
+                let uniqueProducts = response.filter { !self.productIDs.contains($0.id) }
+                self.productIDs.formUnion(uniqueProducts.map { $0.id })
+                
+                self.productsList = uniqueProducts
+                self.productsRelay.onNext(self.productsList)
+                self.cacheService.save(products: uniqueProducts)
+                self.offset += self.pageSize
+                
+            case .failure(let error):
+                self.sendCachedDataIfAvailable()
+                self.errorService.onNext(error)
+            }
+        }
+    }
+    
+    private func sendCachedDataIfAvailable() {
+        if let cached = cacheService.load() {
+            self.productsRelay.onNext(cached)
+        }
+    }
+    
+    func fetchNextPage() {
+        guard !isLoadingMore, !allLoaded else { return }
+        isLoadingMore = true
+        
+        api.getProducts(limit: pageSize, offset: offset) { [weak self] result in
+            guard let self = self else { return }
+            self.isLoadingMore = false
+            
+            switch result {
+            case .success(let response):
+                guard let response = response, !response.isEmpty else {
+                    self.allLoaded = true
+                    return
+                }
+                
+                let newProducts = response.filter { !self.productIDs.contains($0.id) }
+                self.productIDs.formUnion(newProducts.map { $0.id })
+                
+                self.productsList.append(contentsOf: newProducts)
+                self.productsRelay.onNext(self.productsList)
+                self.cacheService.save(products: self.productsList)
+                self.offset += self.pageSize
+                
             case .failure(let error):
                 self.errorService.onNext(error)
             }
-        })
+        }
     }
 }

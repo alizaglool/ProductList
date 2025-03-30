@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Product Model -
 
-public struct Product: Codable {
+public struct Product: Codable, Equatable, Hashable {
     public let id: Int
     public let title: String
     public let price: Double

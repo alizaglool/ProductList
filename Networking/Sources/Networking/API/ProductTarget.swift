@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 public enum ProductTarget {
-    case getProducts
+    case getProducts(limit: Int, offset: Int)
 }
 
 extension ProductTarget: TargetType {
@@ -33,8 +33,12 @@ extension ProductTarget: TargetType {
     
     public var task: Task {
         switch self {
-        default:
-            return .requestPlain
+        case .getProducts(let limit, let offset):
+            let params: [String: Any] = [
+                "limit": limit,
+                "offset": offset
+            ]
+            return .requestParameters(parameters: params, encoding: URLEncoding.default)
         }
     }
     

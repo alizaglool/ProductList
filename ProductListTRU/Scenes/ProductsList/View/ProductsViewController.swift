@@ -90,6 +90,21 @@ extension ProductsViewController {
             })
             .disposed(by: disposeBag)
         
+        productCollectionView.rx.contentOffset
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] offset in
+                guard let self = self else { return }
+                
+                let contentHeight = self.productCollectionView.contentSize.height
+                let frameHeight = self.productCollectionView.frame.size.height
+
+                if offset.y + frameHeight >= contentHeight - 100 {
+                    self.viewModel.fetchNextPage()
+                }
+            })
+            .disposed(by: disposeBag)
+
+        
         viewModel.fetchProducts()
     }
     

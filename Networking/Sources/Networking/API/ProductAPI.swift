@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol ProductAPIProtocol {
-    func getProducts(completion: @escaping (Result<[Product]?, Error>) -> Void)
+    func getProducts(limit: Int, offset: Int, completion: @escaping (Result<[Product]?, Error>) -> Void)
 }
 
 public class ProductAPI: BaseAPI<ProductTarget>, ProductAPIProtocol {
@@ -19,8 +19,8 @@ public class ProductAPI: BaseAPI<ProductTarget>, ProductAPIProtocol {
 // MARK: - Get Cuurncy -
 
 extension ProductAPI {
-    public func getProducts(completion: @escaping (Result<[Product]?, Error>) -> Void) {
-        connectWithServer(target: .getProducts) { result in
+    public func getProducts(limit: Int, offset: Int, completion: @escaping (Result<[Product]?, Error>) -> Void) {
+        connectWithServer(target: .getProducts(limit: limit, offset: offset)) { result in
             completion(result)
         }
     }
