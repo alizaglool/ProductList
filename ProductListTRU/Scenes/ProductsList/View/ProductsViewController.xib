@@ -23,16 +23,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vF4-nK-0lZ">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="100"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwd-ag-9rP">
-                            <rect key="frame" x="150.66666666666666" y="67" width="92" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Products" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iwd-ag-9rP">
+                            <rect key="frame" x="20" y="68" width="353" height="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="iwd-ag-9rP" secondAttribute="bottom" constant="12" id="Ngm-6Z-YlT"/>
+                        <constraint firstItem="iwd-ag-9rP" firstAttribute="leading" secondItem="vF4-nK-0lZ" secondAttribute="leading" constant="20" id="0kv-GZ-egd"/>
+                        <constraint firstAttribute="bottom" secondItem="iwd-ag-9rP" secondAttribute="bottom" constant="8" id="Ngm-6Z-YlT"/>
                         <constraint firstItem="iwd-ag-9rP" firstAttribute="centerX" secondItem="vF4-nK-0lZ" secondAttribute="centerX" id="OXs-0b-UHe"/>
                         <constraint firstAttribute="height" constant="100" id="Yo1-fd-s52"/>
                     </constraints>

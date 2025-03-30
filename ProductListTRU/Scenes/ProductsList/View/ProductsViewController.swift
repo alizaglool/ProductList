@@ -53,8 +53,8 @@ extension ProductsViewController {
             .disposed(by: disposeBag)
         productCollectionView.dataSource = nil
         
-        productCollectionView.register(ProductCollectionViewCell.nib(),
-                                         forCellWithReuseIdentifier: ProductCollectionViewCell.identifier)
+        productCollectionView.register(ProductsCollectionViewCell.nib(),
+                                         forCellWithReuseIdentifier: ProductsCollectionViewCell.identifier)
     }
 }
 
@@ -78,7 +78,7 @@ extension ProductsViewController {
 
         viewModel.products
             .observe(on: MainScheduler.instance)
-            .bind(to: productCollectionView.rx.items(cellIdentifier: ProductCollectionViewCell.identifier, cellType: ProductCollectionViewCell.self)){ (row, model, cell) in
+            .bind(to: productCollectionView.rx.items(cellIdentifier: ProductsCollectionViewCell.identifier, cellType: ProductsCollectionViewCell.self)){ (row, model, cell) in
                 cell.configure(with: ProductCellViewModel(product: model))
             }
             .disposed(by: disposeBag)
@@ -103,19 +103,12 @@ extension ProductsViewController {
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension ProductsViewController: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat = 16
-        let interItemSpacing: CGFloat = 10
-        let numberOfItemsPerRow: CGFloat = 2
-        
-        let totalSpacing = padding * 2 + interItemSpacing * (numberOfItemsPerRow - 1)
-        let availableWidth = collectionView.bounds.width - totalSpacing
-        let itemWidth = floor(availableWidth / numberOfItemsPerRow)
-        
-        return CGSize(width: itemWidth, height: 270)
+        let width = collectionView.bounds.width - 32 // 16 left + 16 right insets
+        return CGSize(width: width, height: 120) // Adjust height based on your cell content
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
