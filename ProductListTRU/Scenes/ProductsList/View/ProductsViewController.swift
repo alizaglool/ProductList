@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import UICurrency
+import Networking
 
 final class ProductsViewController: UIViewController {
     
@@ -75,7 +76,6 @@ extension ProductsViewController {
 extension ProductsViewController {
 
     private func bindTruckSubCollectionViewToViewModel() {
-
         viewModel.products
             .observe(on: MainScheduler.instance)
             .bind(to: productCollectionView.rx.items(cellIdentifier: ProductsCollectionViewCell.identifier, cellType: ProductsCollectionViewCell.self)){ (row, model, cell) in
@@ -83,7 +83,22 @@ extension ProductsViewController {
             }
             .disposed(by: disposeBag)
         
+        productCollectionView.rx.modelSelected(Product.self)
+            .subscribe(onNext: { [weak self] selectedProduct in
+                guard let self else { return }
+                getProductDetails(for: selectedProduct)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.fetchProducts()
+    }
+    
+    private func getProductDetails(for product: Product) {
+        let detailViewModel = ProductDetailsViewModel()
+        detailViewModel.setProduct(product)
+        
+        let detailsVC = ProductDetailsViewController(viewModel: detailViewModel)
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 }
 

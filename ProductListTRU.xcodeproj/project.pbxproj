@@ -24,6 +24,9 @@
 		F837D3D22D98264D00347D01 /* UIView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3D12D98264D00347D01 /* UIView+extension.swift */; };
 		F837D3EB2D9951E600347D01 /* ProductsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F837D3EA2D9951E600347D01 /* ProductsCollectionViewCell.xib */; };
 		F837D3EC2D9951E600347D01 /* ProductsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3E92D9951E600347D01 /* ProductsCollectionViewCell.swift */; };
+		F837D3DB2D994BDC00347D01 /* ProductDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F837D3DA2D994BDC00347D01 /* ProductDetailsViewController.xib */; };
+		F837D3DC2D994BDC00347D01 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3D92D994BDC00347D01 /* ProductDetailsViewController.swift */; };
+		F837D3DE2D994D2300347D01 /* ProductDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F837D3DD2D994D2300347D01 /* ProductDetailsViewModel.swift */; };
 		F8AA3F692D980A88003ABFDD /* ProductsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8AA3F682D980A88003ABFDD /* ProductsViewController.xib */; };
 		F8AA3F6A2D980A88003ABFDD /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8AA3F672D980A88003ABFDD /* ProductsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +52,9 @@
 		F837D3D12D98264D00347D01 /* UIView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+extension.swift"; sourceTree = "<group>"; };
 		F837D3E92D9951E600347D01 /* ProductsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F837D3EA2D9951E600347D01 /* ProductsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsCollectionViewCell.xib; sourceTree = "<group>"; };
+		F837D3D92D994BDC00347D01 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		F837D3DA2D994BDC00347D01 /* ProductDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsViewController.xib; sourceTree = "<group>"; };
+		F837D3DD2D994D2300347D01 /* ProductDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewModel.swift; sourceTree = "<group>"; };
 		F8AA3F672D980A88003ABFDD /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
 		F8AA3F682D980A88003ABFDD /* ProductsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +206,7 @@
 		F837D3D72D994ADD00347D01 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F837D3DD2D994D2300347D01 /* ProductDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -207,6 +214,8 @@
 		F837D3D82D994AE500347D01 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F837D3D92D994BDC00347D01 /* ProductDetailsViewController.swift */,
+				F837D3DA2D994BDC00347D01 /* ProductDetailsViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +305,8 @@
 				477244472A379E9F005E14A8 /* LaunchScreen.storyboard in Resources */,
 				477244442A379E9F005E14A8 /* Assets.xcassets in Resources */,
 				F837D3EB2D9951E600347D01 /* ProductsCollectionViewCell.xib in Resources */,
+				F837D3DB2D994BDC00347D01 /* ProductDetailsViewController.xib in Resources */,
+				F8AA3F6E2D980ADF003ABFDD /* ProductCollectionViewCell.xib in Resources */,
 				F8AA3F692D980A88003ABFDD /* ProductsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,11 +319,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F81257612D98081A00BBF8BF /* ProductsViewModel.swift in Sources */,
+				F837D3DE2D994D2300347D01 /* ProductDetailsViewModel.swift in Sources */,
 				F837D3CC2D981C7200347D01 /* UIImageView+Kingfisher.swift in Sources */,
 				F837D3EC2D9951E600347D01 /* ProductsCollectionViewCell.swift in Sources */,
 				F837D3D22D98264D00347D01 /* UIView+extension.swift in Sources */,
 				4772443B2A379E9D005E14A8 /* AppDelegate.swift in Sources */,
 				F8AA3F6A2D980A88003ABFDD /* ProductsViewController.swift in Sources */,
+				F837D3DC2D994BDC00347D01 /* ProductDetailsViewController.swift in Sources */,
 				4772443D2A379E9D005E14A8 /* SceneDelegate.swift in Sources */,
 				F837D3D02D98264100347D01 /* ShadowBackgroundView.swift in Sources */,
 			);

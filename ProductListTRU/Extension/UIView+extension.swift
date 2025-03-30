@@ -17,4 +17,8 @@ extension UIView {
         self.layer.shadowRadius = shadowRadius
         self.layer.shadowOffset = shadowOffset
     }
+    
+    func applyCornerRadius(cornerRadius: CGFloat = 20) {
+        layer.cornerRadius = cornerRadius
+    }
 }
