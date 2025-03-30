@@ -28,6 +28,7 @@ final class ProductsViewModel: ProductsViewModelType {
     
     private let api: ProductAPIProtocol
     private let cacheService: ProductCacheServiceProtocol
+    private let networkMonitor: NetworkMonitorServiceProtocol
     
     private var productIDs: Set<Int> = []
     private var productsList: [Product] = []
@@ -39,14 +40,22 @@ final class ProductsViewModel: ProductsViewModelType {
     var errorService = PublishSubject<Error>()
     
     init(api: ProductAPIProtocol = ProductAPI(),
-         cacheService: ProductCacheServiceProtocol = ProductCacheService()) {
+         cacheService: ProductCacheServiceProtocol = ProductCacheService(),
+         networkMonitor: NetworkMonitorServiceProtocol = NetworkMonitorService()) {
         self.api = api
         self.cacheService = cacheService
+        self.networkMonitor = networkMonitor
     }
 }
 
 extension ProductsViewModel {
     func fetchProducts() {
+        guard networkMonitor.isConnected else {
+            errorService.onNext(NetworkError.noConnection)
+            sendCachedDataIfAvailable()
+            return
+        }
+        
         offset = 0
         allLoaded = false
         productsList = []
@@ -86,6 +95,11 @@ extension ProductsViewModel {
     }
     
     func fetchNextPage() {
+        guard networkMonitor.isConnected else {
+            errorService.onNext(NetworkError.noConnection)
+            return
+        }
+        
         guard !isLoadingMore, !allLoaded else { return }
         isLoadingMore = true
         

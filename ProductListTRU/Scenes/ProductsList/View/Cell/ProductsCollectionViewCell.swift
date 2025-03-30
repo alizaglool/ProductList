@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import UICurrency
 import Networking
 
 final class ProductsCollectionViewCell: UICollectionViewCell {
